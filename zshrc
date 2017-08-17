@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="minimal"
-DEFAULT_USER="dwieeb"
+DEFAULT_USER="$USER"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -25,6 +25,10 @@ DISABLE_AUTO_UPDATE="true"
 
 # ZSH_TMUX_AUTOSTART="true"
 ZSH_TMUX_AUTOCONNECT="false"
+
+# Android Setup
+ANDROID_HOME=/Users/bo300646/Library/Android/sdk/tools:/Users/bo300646/Library/Android/sdk/platform-tools:/Users/bo300646/Android/sdk/build-tools
+PATH=$ANDROID_HOME:$PATH
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -125,3 +129,5 @@ fi
 if [[ -d "$HOME/.cargo" ]]; then
     PATH=$HOME/.cargo/bin:$PATH
 fi
+
+

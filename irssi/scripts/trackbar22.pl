@@ -1,1 +1,0 @@
-../weed/scripts/trackbar22.pl
