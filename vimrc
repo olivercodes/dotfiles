@@ -1,11 +1,12 @@
 " -------------------------------------
 "  Maintainer:
-"      Daniel Imhoff
+"      Bryan Oliver
 "
 "  Inspired_by:
 "      * https://github.com/feltnerm/dotfiles/blob/master/vimrc
 "      * http://amix.dk/vim/vimrc.html
 "      * https://github.com/tomasr/dotfiles/blob/master/.vimrc
+"      * https://gitlab.com/dwieeb/dotfiles
 "
 " -------------------------------------
 
