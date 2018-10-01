@@ -1,9 +1,9 @@
 [user]
   name = Bryan Oliver 
   email = boliver@linux.com
-  signingkey = 
+  signingkey =
 [github]
-  user = devnetics
+  user = olivercodes
 [credential]
   helper = cache --timeout=3600
 [push]
