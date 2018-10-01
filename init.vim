@@ -88,7 +88,7 @@ call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 call dein#add('kshenoy/vim-signature')
 
 " auto-comment stuff with gc or gcc
-call dein#add("tpope/vim-commentary")
+call dein#add('tpope/vim-commentary')
 
 " auto bracket/quotes. cs"' for example
 " TODO - can't get it to work
