@@ -74,7 +74,15 @@ else
 endif
 
 " deoplete source for typescript
-call dein#add('mhartington/nvim-typescript')
+" call dein#local('~/GitHub', {},['nvim-typescript'])
+"
+" WORKS
+call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+
+" call dein#add('mhartington/nvim-typescript', {'do': './install.sh'})
+
+" does not work
+" call dein#add('mhartington/nvim-typescript')
 
 " display toggle and navigate marks in the sidebar
 call dein#add('kshenoy/vim-signature')
@@ -163,7 +171,7 @@ call dein#add('othree/yajs.vim')
 
 " typescript
 " syntax for typescript
-call dein#add('leafgarland/typescript-vim')
+call dein#add('HerringtonDarkholme/yats.vim')
 
 " scss
 " syntax for scss
@@ -200,6 +208,11 @@ if dein#check_install()
   call dein#install()
   let pluginsExist=1
 endif
+
+" --
+"  Typescript
+" --
+
 
 " ------------------------------------
 "  gitgutter settings
