@@ -29,6 +29,10 @@ endif
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 call dein#begin(expand('~/.config/nvim'))
 
+export NVM_DIR="$HOME/.nvm" 
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
+ [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 call dein#add('Shougo/dein.vim')
 
 " default set of vim settings
@@ -73,11 +77,8 @@ else
     call dein#add('Shougo/neocomplete.vim')
 endif
 
-" deoplete source for typescript
 " call dein#local('~/GitHub', {},['nvim-typescript'])
-"
-" WORKS
-call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+
 
 " call dein#add('mhartington/nvim-typescript', {'do': './install.sh'})
 
@@ -170,8 +171,8 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('othree/yajs.vim')
 
 " typescript
-" syntax for typescript
 call dein#add('HerringtonDarkholme/yats.vim')
+call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 
 " scss
 " syntax for scss
@@ -298,6 +299,87 @@ let g:tmuxline_separators = {
 " -------------------------------------
 "  autocommands
 " -------------------------------------
+
+" -------
+" Import from Mhart's init.vim
+" -------
+"
+autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
+autocmd FileType javascript,typescript,typescript.tsx,json setl foldmethod=syntax
+autocmd FileType html,css,scss,typescript.tsx,vue imap <silent><buffer><expr><tab> <sid>expand_html_tab()
+let g:user_emmet_mode='a'
+let g:user_emmet_complete_tag = 0
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,scss,typescript.tsx,vue EmmetInstall
+autocmd FileType typescript,typescript.tsx setl omnifunc=TSOmniFunc
+let g:nvim_typescript#max_completion_detail=50
+let g:nvim_typescript#completion_mark=''
+let g:nvim_typescript#javascript_support=1
+let g:nvim_typescript#expand_snippet=0
+" let g:nvim_typescript#vue_support=1
+let g:nvim_typescript#diagnostics_enable=1
+
+autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>gd :TSDoc <cr>
+autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>gt :TSType <cr>
+autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>gtd :TSTypeDef <cr>
+autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
+autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
+autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>ti :TSImport <cr>
+autocmd FileType typescript,typescript.tsx,javascript nnoremap <m-Enter> :TSGetCodeFix<CR>
+
+let g:neomake_typescript_enabled_makers = []
+" let g:neomake_typescript_enabled_makers = ['nvim_ts']
+let g:neomake_vue_enabled_makers = []
+let g:neoformat_typescript_prettier = g:standard_prettier_settings
+let g:neoformat_enabled_typescript = ['prettier']
+let g:nvim_typescript#kind_symbols = {
+      \ 'keyword': 'keyword',
+      \ 'class': '',
+      \ 'interface': '',
+      \ 'script': 'script',
+      \ 'module': '',
+      \ 'local class': 'local class',
+      \ 'type': '',
+      \ 'enum': '',
+      \ 'enum member': '',
+      \ 'alias': '',
+      \ 'type parameter': 'type param',
+      \ 'primitive type': 'primitive type',
+      \ 'var': '',
+      \ 'local var': '',
+      \ 'property': '',
+      \ 'let': '',
+      \ 'const': '',
+      \ 'label': 'label',
+      \ 'parameter': 'param',
+      \ 'index': 'index',
+      \ 'function': '',
+      \ 'local function': 'local function',
+      \ 'method': '',
+      \ 'getter': '',
+      \ 'setter': '',
+      \ 'call': 'call',
+      \ 'constructor': '',
+      \}
+
+
+let s:menus.typescript = {
+      \ 'description' : 'typescript commands',
+      \}
+let s:menus.typescript.command_candidates = [
+      \['Get Type', 'TSType' ],
+      \['Get Doc', 'TSDoc'],
+      \['Edit Project Config', 'TSEditConfig'],
+      \['Restart Server', 'TSRestart'],
+      \['Start Server', 'TSStart'],
+      \['Stop Server', 'TSStop'],
+      \]
+
+" --------
+"  End import
+"  -------
+
+
 
 autocmd FileType python BracelessEnable +indent
 autocmd BufWritePost ~/.vimrc source ~/.vimrc
