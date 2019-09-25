@@ -8,6 +8,7 @@
 "      * http://amix.dk/vim/vimrc.html
 "      * https://github.com/tomasr/dotfiles/blob/master/.vimrc
 "      * https://gitlab.com/dwieeb/dotfiles
+"      * https://github.com/mhartington/dotfiles
 "
 " -------------------------------------
 "
