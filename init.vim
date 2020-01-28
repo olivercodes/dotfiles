@@ -30,9 +30,6 @@ endif
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 call dein#begin(expand('~/.config/nvim'))
 
-export NVM_DIR="$HOME/.nvm" 
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 call dein#add('Shougo/dein.vim')
 
@@ -174,6 +171,7 @@ call dein#add('othree/yajs.vim')
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
 call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+call dein#add('prettier/vim-prettier')
 
 " scss
 " syntax for scss
@@ -216,6 +214,7 @@ endif
 " --
 
 
+let s:menus = {}
 " ------------------------------------
 "  gitgutter settings
 " ------------------------------------
@@ -331,7 +330,7 @@ autocmd FileType typescript,typescript.tsx,javascript nnoremap <m-Enter> :TSGetC
 let g:neomake_typescript_enabled_makers = []
 " let g:neomake_typescript_enabled_makers = ['nvim_ts']
 let g:neomake_vue_enabled_makers = []
-let g:neoformat_typescript_prettier = g:standard_prettier_settings
+" let g:neoformat_typescript_prettier = g:standard_prettier_settings
 let g:neoformat_enabled_typescript = ['prettier']
 let g:nvim_typescript#kind_symbols = {
       \ 'keyword': 'keyword',
