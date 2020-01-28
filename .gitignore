@@ -7,3 +7,4 @@ tmux/resurrect
 irssi/config.autosave
 .DS_Store
 Session.vim
+override/oh-my-zsh/custom/themes
