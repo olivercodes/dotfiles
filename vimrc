@@ -184,6 +184,7 @@ call dein#add('hashivim/vim-terraform')
 " -------------------------------------
 
 call dein#add('mhartington/oceanic-next')
+
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('nanotech/jellybeans.vim')
@@ -191,15 +192,9 @@ call dein#add('edkolev/tmuxline.vim')
 
 if dein#check_install()
   call dein#install()
-  let pluginsExist=1
 endif
-
 call dein#end()
 
-if dein#check_install()
-  call dein#install()
-  let pluginsExist=1
-endif
 
 " ------------------------------------
 "  gitgutter settings
@@ -402,6 +397,8 @@ set diffopt+=vertical
 
 " TODO
 let mapleader="\<Space>"
+colorscheme OceanicNext
+
 
 " TODO
 inoremap jk <Esc>

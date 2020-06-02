@@ -30,7 +30,6 @@ endif
 set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 call dein#begin(expand('~/.config/nvim'))
 
-
 call dein#add('Shougo/dein.vim')
 
 " default set of vim settings
@@ -46,25 +45,9 @@ call dein#add('tpope/vim-sensible')
 "  Productivity Plugins
 " -------------------------------------
 
-" TODO nvim theme
-" Neobundle 'mhartington/oceanic-next'
 
-" fuzzy search for files. Shougo deprecated, see Denite.vim
-" call dein#add('Shougo/unite.vim'
-" call dein#add('Shougo/denite')
-call dein#add('Shougo/denite.nvim')
-call dein#add('Shougo/neomru.vim')
-call dein#add('chemzqm/denite-extra')
-call dein#add('pocari/vim-denite-gists')
-
-" Outline source for vim-unite. No idea what that means
-" call dein#add('Shougo/unite-outline'
-
-" No readme. No idea what this does
-" call dein#add('tacroe/unite-mark'
-
-" I'm going to (unsafely) assume this is a color scheme for unite searches
-" call dein#add('ujihisa/unite-colorscheme'
+" fuzzy search for files
+call dein#add('liuchengxu/vim-clap')
 
 if has("nvim")
     " code interactive typing completion 
@@ -75,19 +58,30 @@ else
     call dein#add('Shougo/neocomplete.vim')
 endif
 
-" call dein#local('~/GitHub', {},['nvim-typescript'])
+" go auto complete
+call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+
+let g:deoplete#sources#go#gocode_binary=$HOME.'/go/bin/gocode'
 
 
-" call dein#add('mhartington/nvim-typescript', {'do': './install.sh'})
+" Launch gopls when Go files are in use
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
-" does not work
-" call dein#add('mhartington/nvim-typescript')
+" Run gofmt on save
+" autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
-" display toggle and navigate marks in the sidebar
-call dein#add('kshenoy/vim-signature')
+
+nmap ; :Clap! files<CR>
 
 " auto-comment stuff with gc or gcc
 call dein#add('tpope/vim-commentary')
+
+" airline
+call dein#add('vim-airline/vim-airline')
+
+" ale
+call dein#add('dense-analysis/ale')
 
 " auto bracket/quotes. cs"' for example
 " TODO - can't get it to work
@@ -95,6 +89,9 @@ call dein#add('tpope/vim-surround')
 
 " repeats . with the entire map instead of last native command within the map
 call dein#add('tpope/vim-repeat')
+
+" golang
+call dein#add('fatih/vim-go')
 
 " shortcut keymappings from tpope
 " [f and ]f navigate between files in a directory
@@ -115,10 +112,9 @@ call dein#add('tpope/vim-eunuch')
 " Indentation highlights for a file. TODO - couldn't get it to work
 call dein#add('nathanaelkane/vim-indent-guides')
 
-" Highlights the first occurences of characters to the left and right of your
-" cursor - TODO not working
+let g:indent_guides_start_level = 2
+set ts=2 sw=2 et
 
-call dein#add('unblevable/quick-scope')
 
 " text objects to give you more targets
 " di' deletes everything within '' or ""
@@ -134,8 +130,7 @@ call dein#add('wellle/targets.vim')
 call dein#add('tpope/vim-obsession')
 
 " Extend % matching for HTML, Latex, and other langs
-" TODO - no idea what that means
-call dein#add('dwieeb/vim-matchit')
+call dein#add('tmhedberg/matchit')
 
 " make your own text objects
 call dein#add('kana/vim-textobj-user')
@@ -143,7 +138,6 @@ call dein#add('kana/vim-textobj-user')
 " text objects for indented blocks of lines
 " provide text objects to sleect a block of lines which are similarly indented
 " to the current line
-" TODO - no idea what this means
 call dein#add('kana/vim-textobj-indent')
 
 " -------------------------------------
@@ -154,14 +148,38 @@ call dein#add('kana/vim-textobj-indent')
 " transparent editing of gpg encrypted files
 call dein#add('jamessan/vim-gnupg')
 
-" git
-" GBlame
-" TODO - learn more commands from this
-" TODO - not working
+" :Git diff
+" :Git add
+" :Git commit
+" :Git blame
 call dein#add('tpope/vim-fugitive')
 
+" ------------------------------------------------------------
 " shows a git diff in the gutter, with + - lines
-" TODO learn commands for going through a diff
+" You can explicitly turn vim-gitgutter off and on (defaults to on):
+
+" turn off with :GitGutterDisable
+" turn on with :GitGutterEnable
+" toggle with :GitGutterToggle.
+" To toggle vim-gitgutter per buffer:
+
+" turn off with :GitGutterBufferDisable
+" turn on with :GitGutterBufferEnable
+" toggle with :GitGutterBufferToggle
+" You can turn the signs on and off (defaults to on):
+
+" turn on with :GitGutterSignsEnable
+" turn off with :GitGutterSignsDisable
+" toggle with :GitGutterSignsToggle.
+" And you can turn line highlighting on and off (defaults to off):
+
+" turn on with :GitGutterLineHighlightsEnable
+" turn off with :GitGutterLineHighlightsDisable
+" toggle with :GitGutterLineHighli
+
+" turn on with :GitGutterLineNrHighlightsEnable
+" turn off with :GitGutterLineNrHighlightsDisable
+" toggle with :GitGutterLineNrHighlightsToggle.
 call dein#add('airblade/vim-gitgutter')
 
 " es6
@@ -170,8 +188,11 @@ call dein#add('othree/yajs.vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
-call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
-call dein#add('prettier/vim-prettier')
+
+" TSDef
+" TSDoc
+" TSTypeDef
+call dein#local('~/GitHub', {},['nvim-typescript'])
 
 " scss
 " syntax for scss
@@ -184,37 +205,26 @@ call dein#add('scrooloose/syntastic')
 " terraform
 " adds the :Terraform command
 " :TerraformFmt runs terraform fmt against current buffer
-" TODO - wtf is terraform
 call dein#add('hashivim/vim-terraform')
 
 " -------------------------------------
 "  Appearance & Theme Plugins
 " -------------------------------------
 
-call dein#add('mhartington/oceanic-next')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#add('nanotech/jellybeans.vim')
+" Blue vim theme
+call dein#add('mhartington/oceanic-next', {'build': './install.sh'})
+
+" Tmux status line
 call dein#add('edkolev/tmuxline.vim')
 
+" Install all the things above this line
 if dein#check_install()
   call dein#install()
-  let pluginsExist=1
 endif
-
 call dein#end()
 
-if dein#check_install()
-  call dein#install()
-  let pluginsExist=1
-endif
+syntax on 
 
-" --
-"  Typescript
-" --
-
-
-let s:menus = {}
 " ------------------------------------
 "  gitgutter settings
 " ------------------------------------
@@ -226,8 +236,7 @@ let g:gitgutter_realtime = 1
 "     let g:syntastic_javascript_checkers = [ 'eslint' ]
 " endif
 
-let g:syntastic_typescript_checkers = [ 'tslint', 'tsc' ]
-
+" Ignore custom html ionic tags
 let g:syntastic_html_tidy_ignore_errors = [
     \ '<ion-',
     \ '<ui-',
@@ -241,33 +250,36 @@ let g:syntastic_quiet_messages = {
     \ "regex": "main redeclared in this block"}
 
 " ------------------------------------
+"  golang settings
+" ------------------------------------
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+" let g:go_auto_sameids = 1
+
+" Run goimports when running gofmt
+let g:go_fmt_command = "goimports"
+
+" ------------------------------------
 "  airline settings
 " ------------------------------------
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+let g:airline#extensions#ale#enabled = 1
+
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 0
 let g:airline_theme = 'jellybeans'
-
-" ------------------------------------
-"  Unite settings
-" ------------------------------------
-
-"call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#profile('default', 'context.smartcase', 1)
-"call unite#custom#profile('default', 'context.ignorecase', 1)
-"let g:unite_prompt = '» '
-"let g:unite_source_history_yank_enable = 1
-
-" ------------------------------------
-"  Unite mark settings
-" ------------------------------------
-
-"let g:unite_source_mark_marks =
-"            \   "abcdefghijklmnopqrstuvwxyz"
-"            \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 " ------------------------------------
 "  neocomplete/deoplete settings
@@ -296,14 +308,11 @@ let g:tmuxline_separators = {
     \ 'right_alt' : '<',
     \ 'space' : ' '}
 
-" -------------------------------------
-"  autocommands
-" -------------------------------------
-
 " -------
 " Import from Mhart's init.vim
 " -------
-"
+" Todo readd and fix typescript
+" 
 autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
 autocmd FileType javascript,typescript,typescript.tsx,json setl foldmethod=syntax
 autocmd FileType html,css,scss,typescript.tsx,vue imap <silent><buffer><expr><tab> <sid>expand_html_tab()
@@ -312,74 +321,19 @@ let g:user_emmet_complete_tag = 0
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,scss,typescript.tsx,vue EmmetInstall
 autocmd FileType typescript,typescript.tsx setl omnifunc=TSOmniFunc
-let g:nvim_typescript#max_completion_detail=50
-let g:nvim_typescript#completion_mark=''
-let g:nvim_typescript#javascript_support=1
-let g:nvim_typescript#expand_snippet=0
-" let g:nvim_typescript#vue_support=1
-let g:nvim_typescript#diagnostics_enable=1
-
-autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>gd :TSDoc <cr>
-autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>gt :TSType <cr>
-autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>gtd :TSTypeDef <cr>
-autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
-autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
-autocmd FileType typescript,typescript.tsx,javascript map <silent> <leader>ti :TSImport <cr>
-autocmd FileType typescript,typescript.tsx,javascript nnoremap <m-Enter> :TSGetCodeFix<CR>
-
-let g:neomake_typescript_enabled_makers = []
-" let g:neomake_typescript_enabled_makers = ['nvim_ts']
-let g:neomake_vue_enabled_makers = []
-" let g:neoformat_typescript_prettier = g:standard_prettier_settings
-let g:neoformat_enabled_typescript = ['prettier']
-let g:nvim_typescript#kind_symbols = {
-      \ 'keyword': 'keyword',
-      \ 'class': '',
-      \ 'interface': '',
-      \ 'script': 'script',
-      \ 'module': '',
-      \ 'local class': 'local class',
-      \ 'type': '',
-      \ 'enum': '',
-      \ 'enum member': '',
-      \ 'alias': '',
-      \ 'type parameter': 'type param',
-      \ 'primitive type': 'primitive type',
-      \ 'var': '',
-      \ 'local var': '',
-      \ 'property': '',
-      \ 'let': '',
-      \ 'const': '',
-      \ 'label': 'label',
-      \ 'parameter': 'param',
-      \ 'index': 'index',
-      \ 'function': '',
-      \ 'local function': 'local function',
-      \ 'method': '',
-      \ 'getter': '',
-      \ 'setter': '',
-      \ 'call': 'call',
-      \ 'constructor': '',
-      \}
-
-
-let s:menus.typescript = {
-      \ 'description' : 'typescript commands',
-      \}
-let s:menus.typescript.command_candidates = [
-      \['Get Type', 'TSType' ],
-      \['Get Doc', 'TSDoc'],
-      \['Edit Project Config', 'TSEditConfig'],
-      \['Restart Server', 'TSRestart'],
-      \['Start Server', 'TSStart'],
-      \['Stop Server', 'TSStop'],
-      \]
+autocmd FileType typescript,typescriptreact,javascript setl omnifunc=TSOmniFunc
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gd :TSDoc <cr>
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gt :TSType <cr>
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gtd :TSTypeDef <cr>
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gtD :TSDef <cr>
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
+autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>ti :TSImport <cr>
+autocmd FileType typescript,typescriptreact,javascript nnoremap <m-Enter> :TSGetCodeFix<CR>
 
 " --------
 "  End import
 "  -------
-
-
 
 autocmd FileType python BracelessEnable +indent
 autocmd BufWritePost ~/.vimrc source ~/.vimrc
@@ -390,9 +344,9 @@ autocmd BufReadPre *.css setlocal tabstop=2 | setlocal softtabstop=2 | setlocal 
 autocmd BufReadPre *.scss setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
 autocmd BufReadPre *.rst setlocal textwidth=80
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif"`'")"'")
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal! g'\"" |
+      \ endif
 
 " -------------------------------------
 "  Filetype settings for extensions
@@ -402,13 +356,13 @@ au BufRead,BufNewFile *.wsgi set filetype=python
 au BufRead,BufNewFile *.module set filetype=php
 au BufRead,BufNewFile *.install set filetype=php
 au BufRead,BufNewFile *.schema set filetype=javascript
-" au BufRead,BufNewFile *.Vue set filetype=Vue
 
 " -------------------------------------
 "  General settings
 " -------------------------------------
 
 filetype plugin indent on
+filetype plugin on
 
 " allows scrolling in tmux?
 set mouse=a
@@ -427,14 +381,6 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
-" Make esc faster
-" set esckeys
-
-" Folds
-" set foldmethod=indent
-
-" TODO what is wildignore
 set wildignore+=*.db,*.o,*.obj
 set wildignore+=*.swp,*.bak,*.lock
 set wildignore+=*.git,*.svn
@@ -442,38 +388,30 @@ set wildignore+=*DS_Store*
 set wildignore+=**/tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.app,*.dmg,*.pdf,*.so
-
-" TODO
 set completeopt-=preview
 
 " -------------------------------------
 "  Appearance settings
 " -------------------------------------
 
-" TODO lookup each
 set background=dark
 set t_Co=256
 set hlsearch
 set cursorline
-set listchars=tab:>~,nbsp:_,trail:.
-set list
+set listchars=nbsp:_,trail:.,tab:\ \
+"set list
 set number
 set relativenumber
 set numberwidth=5
-" TODO
 set showcmd
 if !has("nvim")
-    " TODO
     set lazyredraw
 end
-
-colorscheme jellybeans
 
 " -------------------------------------
 "  File & backup settings
 " -------------------------------------
 
-" TODO
 set nobackup
 set nowb
 set noswapfile
@@ -494,11 +432,27 @@ set diffopt+=vertical
 " -------------------------------------
 "  Keyboard shortcuts
 " -------------------------------------
-
-" TODO
+"
+let g:clap_insert_mode_only = v:true
+let g:clap_layout = { 'relative': 'editor' }
+let g:clap_enable_icon = 1
+let g:clap_theme = 'oceanicnext'
+nnoremap <silent> <c-p>      :Clap files<CR>
+nnoremap <silent> <leader>a  :Clap grep<CR>
+nnoremap <silent> <leader>h  :Clap help_tags<CR>
+nnoremap <silent> <leader>u  :DeinUpdate<CR>
+noremap <silent> <leader>f :Neoformat<CR>
+let g:neoformat_vue_prettier = {
+      \ 'exe': 'vue-formatter',
+      \ 'stdin': 1,
+      \}
+let g:neoformat_zsh_shfmt = {
+      \ 'exe': 'shfmt',
+      \ 'args': ['-i ' . shiftwidth()],
+      \ 'stdin': 1,
+      \ }
+let g:neoformat_enabled_zsh = ['shfmt']
 let mapleader="\<Space>"
-
-" TODO
 inoremap jk <Esc>
 
 " Ex mode: no ty
@@ -522,17 +476,6 @@ vnoremap > >gv
 if (has("termguicolors"))
   set termguicolors
 endif
-syntax enable
-colorscheme OceanicNext
-
-" Unite
-"nnoremap <Leader>p :Unite -start-insert -no-split -no-resize file_rec/git<cr>
-"nnoremap <Leader>f :Unite -start-insert -no-split -no-resize file file/new directory/new<cr>
-"nnoremap <Leader>b :Unite -start-insert -no-split -no-resize buffer<cr>
-"nnoremap <Leader>y :Unite -start-insert -no-split -no-resize history/yank<cr>
-"nnoremap <Leader>o :Unite -start-insert -no-split -no-resize outline<cr>
-"nnoremap <Leader>/ :Unite -start-insert -no-split -no-resize -no-empty grep/git:.<cr>
-
 
 " Neocomplete
 inoremap <expr><C-g> neocomplete#undo_completion()
@@ -542,3 +485,5 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " Commands
 command! W w
 command! Q q
+
+colorscheme OceanicNext

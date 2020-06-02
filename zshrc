@@ -1,3 +1,4 @@
+ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -32,7 +33,7 @@ PATH=$ANDROID_HOME:$PATH
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git tmux vi-mode heroku golang gulp pass docker docker-compose yarn)
+plugins=(git tmux vi-mode heroku golang gulp pass docker docker-compose yarn terraform)
 
 export GPGKEY=6B4B0C48
 
@@ -130,5 +131,25 @@ if [[ -d "$HOME/.cargo" ]]; then
     PATH=$HOME/.cargo/bin:$PATH
 fi
 
+#if [[ -d "$HOME/dev/tools/istio-1.5.1" ]]; then
+#  PATH=$HOME/dev/tools/istio-1.5.1/bin:$PATH
+#fi
 
+autoload -U +X bashcompinit && bashcompinit
+
+complete -o nospace -C /usr/local/bin/terraform terraform
+compdef tf='terraform'
+setopt complete_aliases
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias k=kubectl
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/a6277/dev/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/a6277/dev/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/a6277/dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/a6277/dev/google-cloud-sdk/completion.zsh.inc'; fi
+
+echo -e "$(nvm use 12)"
+
+eval "$(pyenv init -)"
