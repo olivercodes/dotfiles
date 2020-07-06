@@ -42,7 +42,8 @@ else
     echo "Updating dotfiles and dependencies..."
 
     # Update dotfiles submodules
-    git submodule update --init --recursive
+    # git submodule update --init --recursive
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.dotfiles/oh-my-zsh
 
     echo -e $GREEN"   done!"$END_COLOR
 fi
