@@ -136,6 +136,7 @@ fi
 #fi
 
 autoload -U +X bashcompinit && bashcompinit
+export PATH=$HOME/.service-mesh-hub/bin:$PATH
 
 complete -o nospace -C /usr/local/bin/terraform terraform
 compdef tf='terraform'
@@ -152,4 +153,10 @@ if [ -f '/Users/a6277/dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users
 
 echo -e "$(nvm use 12)"
 
+alias tf=terraform
+
 eval "$(pyenv init -)"
+
+  # Set Spaceship ZSH as a prompt
+  autoload -U promptinit; promptinit
+  prompt spaceship
