@@ -8,6 +8,15 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="spaceship"
 DEFAULT_USER="$USER"
+SPACESHIP_BATTERY_SHOW=true
+SPACESHIP_BATTERY_THRESHOLD=100
+
+
+# export JAVA_HOME=/usr/local/opt/openjdk@11
+
+javamon() {
+  nodemon -e java -w src -x 'javac --class-path ./src -d ./bin src/**/'$1'.java; java --class-path ./bin '$1 
+}
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -154,6 +163,9 @@ if [ -f '/Users/a6277/dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users
 echo -e "$(nvm use 12)"
 
 alias tf=terraform
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 
 eval "$(pyenv init -)"
 

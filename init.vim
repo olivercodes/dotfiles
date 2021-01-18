@@ -1,4 +1,3 @@
-  
 " -------------------------------------
 "  Maintainer:
 "     Bryan Oliver 
@@ -37,6 +36,11 @@ call dein#add('Shougo/dein.vim')
 " runtime! plugin/sensible.vim
 " then put overrides below that line
 call dein#add('tpope/vim-sensible')
+
+call dein#add('neoclide/coc.nvim', {'branch': 'release'})
+
+" vim javascript
+call dein#add('pangloss/vim-javascript')
 
 " Command execution within vim, not sure how t use yet
 " call dein#add('Shougo/vimproc.vim', {'build': {'unix': g:make}})
@@ -192,7 +196,8 @@ call dein#add('HerringtonDarkholme/yats.vim')
 " TSDef
 " TSDoc
 " TSTypeDef
-call dein#local('~/GitHub', {},['nvim-typescript'])
+" call dein#local('~/GitHub', {},['nvim-typescript'])
+call dein#local('~/Github', {},['nvim-typescript'])
 
 " scss
 " syntax for scss
@@ -279,7 +284,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 0
-let g:airline_theme = 'jellybeans'
+" let g:airline_theme = 'jellybeans'
 
 " ------------------------------------
 "  neocomplete/deoplete settings
@@ -288,11 +293,13 @@ let g:airline_theme = 'jellybeans'
 let g:acp_enableAtStartup = 0
 
 if has("nvim")
-    let g:deoplete#enable_at_startup = 1
+    " let g:deoplete#enable_at_startup = 1
+    let g:deoplete#sources={} 
 else
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
 endif
+
 
 " ------------------------------------
 "  tmuxline settings
@@ -308,6 +315,10 @@ let g:tmuxline_separators = {
     \ 'right_alt' : '<',
     \ 'space' : ' '}
 
+" disaledeoplete for scala
+autocmd FileType scala let b:deoplete_disable_auto_complete = 1
+
+
 " -------
 " Import from Mhart's init.vim
 " -------
@@ -320,16 +331,16 @@ let g:user_emmet_mode='a'
 let g:user_emmet_complete_tag = 0
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,scss,typescript.tsx,vue EmmetInstall
-autocmd FileType typescript,typescript.tsx setl omnifunc=TSOmniFunc
-autocmd FileType typescript,typescriptreact,javascript setl omnifunc=TSOmniFunc
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gd :TSDoc <cr>
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gt :TSType <cr>
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gtd :TSTypeDef <cr>
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gtD :TSDef <cr>
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
-autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>ti :TSImport <cr>
-autocmd FileType typescript,typescriptreact,javascript nnoremap <m-Enter> :TSGetCodeFix<CR>
+" autocmd FileType typescript,typescript.tsx setl omnifunc=TSOmniFunc
+" autocmd FileType typescript,typescriptreact,javascript setl omnifunc=TSOmniFunc
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gd :TSDoc <cr>
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gt :TSType <cr>
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gtd :TSTypeDef <cr>
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>gtD :TSDef <cr>
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>@ :Denite -buffer-name=TSDocumentSymbol TSDocumentSymbol <cr>
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader># :Denite -buffer-name=TSWorkspaceSymbol TSWorkspaceSymbol <cr>
+" autocmd FileType typescript,typescriptreact,javascript map <silent> <leader>ti :TSImport <cr>
+" autocmd FileType typescript,typescriptreact,javascript nnoremap <m-Enter> :TSGetCodeFix<CR>
 
 " --------
 "  End import
@@ -356,6 +367,7 @@ au BufRead,BufNewFile *.wsgi set filetype=python
 au BufRead,BufNewFile *.module set filetype=php
 au BufRead,BufNewFile *.install set filetype=php
 au BufRead,BufNewFile *.schema set filetype=javascript
+au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
 
 " -------------------------------------
 "  General settings
