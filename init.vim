@@ -48,6 +48,8 @@ call dein#add('pangloss/vim-javascript')
 " -------------------------------------
 "  Productivity Plugins
 " -------------------------------------
+call dein#add('kyazdani42/nvim-web-devicons')
+call dein#add('kyazdani42/nvim-tree.lua')
 
 
 " fuzzy search for files
@@ -71,6 +73,9 @@ let g:deoplete#sources#go#gocode_binary=$HOME.'/go/bin/gocode'
 " Launch gopls when Go files are in use
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+
+" nvim-tree settings
+let g:nvim_tree_auto_open = 1
 
 " Run gofmt on save
 " autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()

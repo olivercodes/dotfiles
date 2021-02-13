@@ -91,4 +91,9 @@ if [[ ! -L $USER_HOME"/.oh-my-zsh/custom/themes" ]]; then
     echo -e $GREEN"   done!"$END_COLOR
 fi
 
+## symlink init.vim
+if [[ -z $PWD/init.vim ]]; then
+  ln -s $PWD/init.vim $USER_HOME/.config/nvim/init.vim
+fi
+
 vi -c ":q"
