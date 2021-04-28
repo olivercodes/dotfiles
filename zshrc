@@ -154,12 +154,6 @@ setopt complete_aliases
 
 alias k=kubectl
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/a6277/dev/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/a6277/dev/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/a6277/dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/a6277/dev/google-cloud-sdk/completion.zsh.inc'; fi
-
 echo -e "$(nvm use 12)"
 
 alias tf=terraform
@@ -172,3 +166,9 @@ eval "$(pyenv init -)"
   # Set Spaceship ZSH as a prompt
   autoload -U promptinit; promptinit
   prompt spaceship
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/bryanoliver/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bryanoliver/tools/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/bryanoliver/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bryanoliver/tools/google-cloud-sdk/completion.zsh.inc'; fi
