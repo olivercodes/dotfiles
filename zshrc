@@ -30,6 +30,9 @@ DISABLE_AUTO_UPDATE="true"
 # Uncomment following line if you want to disable autosetting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
+# Set the display value for x forwarding
+export DISPLAY=:0
+
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
@@ -172,3 +175,5 @@ if [ -f '/Users/bryanoliver/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/bryanoliver/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bryanoliver/tools/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -s "/home/oliver/.jabba/jabba.sh" ] && source "/home/oliver/.jabba/jabba.sh"

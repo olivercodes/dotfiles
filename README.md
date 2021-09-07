@@ -16,3 +16,12 @@ Pull recursively, and then update submodules.
     git pull --recurse-submodules
     git submodule init
     git submodule update
+
+## TODO
+Neovim 5 install
+
+terraform-ls
+
+CoCConfig
+- Terraform
+- Golang
