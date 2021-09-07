@@ -15,7 +15,7 @@ SPACESHIP_BATTERY_THRESHOLD=100
 # export JAVA_HOME=/usr/local/opt/openjdk@11
 
 javamon() {
-  nodemon -e java -w src -x 'javac --class-path ./src -d ./bin src/**/'$1'.java; java --class-path ./bin '$1 
+  nodemon -e java -w src -x 'javac --class-path ./src -d ./bin src/**/'$1'.java; java -XX:ErrorFile=/var/log/java/java_error%p.log --class-path ./bin -XX:ErrorFile=java.log '$1 
 }
 
 # Set to this to use case-sensitive completion
