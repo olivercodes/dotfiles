@@ -45,6 +45,8 @@ call dein#add('AndrewRadev/splitjoin.vim')
 
 call dein#add('neoclide/coc.nvim', {'branch': 'release'})
 
+call dein#add('iamcco/coc-angular')
+
 " vim javascript
 call dein#add('pangloss/vim-javascript')
 

@@ -171,9 +171,9 @@ eval "$(pyenv init -)"
   prompt spaceship
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/bryanoliver/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bryanoliver/tools/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "/Users/$USER/tools/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/$USER/tools/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/bryanoliver/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bryanoliver/tools/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "/Users/$USER/tools/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/$USER/tools/google-cloud-sdk/completion.zsh.inc"; fi
 
-[ -s "/home/oliver/.jabba/jabba.sh" ] && source "/home/oliver/.jabba/jabba.sh"
+[ -s "/Users/$USER/.jabba/jabba.sh" ] && source "/Users/a6277/.jabba/jabba.sh"
