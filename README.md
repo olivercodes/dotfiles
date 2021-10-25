@@ -9,14 +9,6 @@ Simply clone the repository and run the deploy script.
 
 * You need to tell brew to install vim --with-lua.
 
-### Updating
-
-Pull recursively, and then update submodules.
-
-    git pull --recurse-submodules
-    git submodule init
-    git submodule update
-
 ## TODO
 Neovim 5 install
 
