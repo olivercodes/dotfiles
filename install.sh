@@ -48,6 +48,7 @@ packages=(
 "tmux"
 "neovim"
 "zsh"
+"pure"
 )
 
 for i in "${packages[@]}"; do
