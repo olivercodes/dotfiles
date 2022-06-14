@@ -108,7 +108,10 @@ echo "---------------------------------------------------------"
 
 echo "installing node version manager"
 ~/.dotfiles/nvm/install.sh
+echo "---------------------------------------------------------"
 
+echo "installing powerline font"
+~/.dotfiles/fonts/install.sh
 echo "---------------------------------------------------------"
 
 export KEEP_ZSHRC=yes
