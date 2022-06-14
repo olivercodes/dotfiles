@@ -127,8 +127,10 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 source "$HOME/.zsh/tmux.zsh"
-source "$HOME/.dotfiles/z/z.sh"
+_Z_DATA=$HOME/.z.sh_data
+source "$HOME/.z/z.sh"
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
