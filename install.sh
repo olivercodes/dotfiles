@@ -81,9 +81,16 @@ fi
 
 echo "Cloning olivercodes's dotfiles insto .dotfiles"
 git clone https://github.com/olivercodes/dotfiles.git ~/.dotfiles
+echo "---------------------------------------------------------"
 
+echo "init dotfile submodules"
 cd $HOME/.dotfiles
 git submodule update --init --recursive
+echo "---------------------------------------------------------"
+
+echo "init z.sh before rcup, this is to prevent rcup from auto-syncing the z folder into ~/"
+source $HOME/.dotfiles/z/z.sh
+echo "---------------------------------------------------------"
 
 cd $HOME
 echo "running RCM's rcup command"
