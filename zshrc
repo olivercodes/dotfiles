@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="spaceship"
-plugins=(git tmux vi-mode golang gulp pass docker yarn terraform)
+ZSH_THEME="robbyrussell"
+plugins=(git tmux vi-mode golang gulp pass docker yarn terraform kubectl)
 source $ZSH/oh-my-zsh.sh
 ZSH_DISABLE_COMPFIX=true
 

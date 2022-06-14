@@ -114,10 +114,6 @@ echo "installing powerline font"
 ~/.dotfiles/fonts/install.sh
 echo "---------------------------------------------------------"
 
-echo "installing spaceship"
-brew install spaceship
-echo "---------------------------------------------------------"
-
 export KEEP_ZSHRC=yes
 echo "setup oh-my-zsh"
 ~/.dotfiles/ohmyzsh/tools/install.sh
