@@ -111,13 +111,9 @@ echo "installing node version manager"
 
 echo "---------------------------------------------------------"
 
+export KEEP_ZSHRC=yes
 echo "setup oh-my-zsh"
 ~/.dotfiles/ohmyzsh/tools/install.sh
-
-echo "setting zshrc back, cat .zshrc.pre-oh-my-zsh >> .zshrc"
-cat .zshrc.pre-oh-my-zsh >> .zshrc
-echo "you'll need to restart terminal for this to take effect"
-
 
 echo "---------------------------------------------------------"
 echo "All done!"

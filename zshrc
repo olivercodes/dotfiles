@@ -1,16 +1,16 @@
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="spaceship"
+plugins=(git tmux vi-mode golang gulp pass docker yarn terraform)
+source $ZSH/oh-my-zsh.sh
 ZSH_DISABLE_COMPFIX=true
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="spaceship"
 DEFAULT_USER="$USER"
 SPACESHIP_BATTERY_SHOW=true
 SPACESHIP_BATTERY_THRESHOLD=100
-
 
 # export JAVA_HOME=/usr/local/opt/openjdk@11
 
@@ -18,23 +18,11 @@ javamon() {
   nodemon -e java -w src -x 'javac --class-path ./src -d ./bin src/**/'$1'.java; java -XX:ErrorFile=/var/log/java/java_error%p.log --class-path ./bin -XX:ErrorFile=java.log '$1 
 }
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
 # Comment this out to disable weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
 
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
 # Set the display value for x forwarding
 export DISPLAY=:0
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
 
 # ZSH_TMUX_AUTOSTART="true"
 ZSH_TMUX_AUTOCONNECT="false"
@@ -45,7 +33,6 @@ PATH=$ANDROID_HOME:$PATH
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git tmux vi-mode heroku golang gulp pass docker docker-compose yarn terraform)
 
 export GPGKEY=6B4B0C48
 
@@ -143,10 +130,6 @@ if [[ -d "$HOME/.cargo" ]]; then
     PATH=$HOME/.cargo/bin:$PATH
 fi
 
-#if [[ -d "$HOME/dev/tools/istio-1.5.1" ]]; then
-#  PATH=$HOME/dev/tools/istio-1.5.1/bin:$PATH
-#fi
-
 autoload -U +X bashcompinit && bashcompinit
 export PATH=$HOME/.service-mesh-hub/bin:$PATH
 
@@ -161,9 +144,9 @@ eval "$(jenv init -)"
 
 eval "$(pyenv init -)"
 
-  # Set Spaceship ZSH as a prompt
-  autoload -U promptinit; promptinit
-  prompt spaceship
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "/Users/$USER/tools/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/$USER/tools/google-cloud-sdk/path.zsh.inc"; fi
