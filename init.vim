@@ -1,3 +1,4 @@
+
 " -------------------------------------
 "  Maintainer:
 "     Bryan Oliver 
@@ -43,7 +44,8 @@ call dein#add('kien/ctrlp.vim')
 " splitjoin
 call dein#add('AndrewRadev/splitjoin.vim')
 
-call dein#add('neoclide/coc.nvim', {'branch': 'release'})
+" https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim#using-deinvim
+call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
 
 call dein#add('iamcco/coc-angular')
 

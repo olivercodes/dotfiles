@@ -63,3 +63,23 @@ chsh -s $(which zsh)
 
 echo "running osx defaults"
 ~/.osx.sh
+
+echo "create clean nvim setup"
+# TODO - add an if
+if [ -d "$HOME/.config/nvim" ] # && clean_install = true
+then
+  echo "nvim folder already present, removing"
+  rm -rf $HOME/.config/nvim
+fi
+
+echo "linking init.vim for neovim"
+mkdir -p $HOME/.config/nvim
+ln -s $HOME/.init.vim ~/.config/nvim/init.vim
+
+echo "---------------------------------------------------------"
+echo "All done!"
+echo "and change your terminal font to source code pro"
+echo "Cheers"
+echo "---------------------------------------------------------"
+
+exit 0
