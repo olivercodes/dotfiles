@@ -142,7 +142,8 @@ setopt complete_aliases
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
+# symlink;
 
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
