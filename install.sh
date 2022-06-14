@@ -60,3 +60,6 @@ rcup
 
 echo "setting zsh"
 chsh -s $(which zsh)
+
+echo "running osx defaults"
+~./osx.sh
