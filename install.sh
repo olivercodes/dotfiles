@@ -1,0 +1,41 @@
+#!/bin/sh
+
+brew="/usr/local/bin/brew"
+if [ -f "$brew" ]
+then
+  echo "Homebrew is installed, nothing to do"
+else
+  echo "Homebrew is not installed, installing"
+  echo "This may take a while"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+packages=(
+"git"
+"node"
+"tmux"
+"neovim"
+"zsh"
+)
+
+for i in "${packages[@]}"; do
+  brew install $i
+  echo "---------------------"
+done
+
+echo "installing RCM for dotfiles"
+brew tap thoughtbot/formulae
+brew install rcm
+echo "------------------------"
+
+
+localGit="/usr/local/bin/git"
+if [ -f "$localGit" ]
+then
+  echo "git is all good"
+else
+  echo "git is not installed"
+fi
+
+echo "Cloning Mike's dotfiles insto .dotfiles"
+git clone https://github.com/olivercodes/dotfiles.git ~/.dotfiles
