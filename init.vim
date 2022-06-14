@@ -360,7 +360,7 @@ autocmd FileType html,css,scss,typescript.tsx,vue EmmetInstall
 " --------
 "  End import
 "  -------
-let g:python3_host_prog=/usr/bin/python3
+" let g:python3_host_prog=/usr/bin/python3
 autocmd FileType python BracelessEnable +indent
 autocmd BufWritePost ~/.vimrc source ~/.vimrc
 autocmd BufReadPre *.js setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
