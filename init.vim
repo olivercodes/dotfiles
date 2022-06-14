@@ -1,3 +1,4 @@
+
 " -------------------------------------
 "  Maintainer:
 "     Bryan Oliver 
@@ -43,7 +44,8 @@ call dein#add('kien/ctrlp.vim')
 " splitjoin
 call dein#add('AndrewRadev/splitjoin.vim')
 
-call dein#add('neoclide/coc.nvim', {'branch': 'release'})
+" https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim#using-deinvim
+call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
 
 call dein#add('iamcco/coc-angular')
 
@@ -358,7 +360,7 @@ autocmd FileType html,css,scss,typescript.tsx,vue EmmetInstall
 " --------
 "  End import
 "  -------
-let g:python3_host_prog=/usr/bin/python3
+" let g:python3_host_prog=/usr/bin/python3
 autocmd FileType python BracelessEnable +indent
 autocmd BufWritePost ~/.vimrc source ~/.vimrc
 autocmd BufReadPre *.js setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
