@@ -1,4 +1,4 @@
-plugins=(git)
+plugins=(git tmux golang docker terraform kubectl)
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
