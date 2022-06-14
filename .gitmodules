@@ -4,9 +4,6 @@
 [submodule "nvm"]
 	path = nvm
 	url = https://github.com/nvm-sh/nvm
-[submodule "ohmyzsh"]
-	path = ohmyzsh
-	url = https://github.com/ohmyzsh/ohmyzsh
 [submodule "fonts"]
 	path = fonts
 	url = https://github.com/powerline/fonts

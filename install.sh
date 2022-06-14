@@ -114,9 +114,9 @@ echo "installing powerline font"
 ~/.dotfiles/fonts/install.sh
 echo "---------------------------------------------------------"
 
-export KEEP_ZSHRC=yes
-echo "setup oh-my-zsh"
-~/.dotfiles/ohmyzsh/tools/install.sh
+# export KEEP_ZSHRC=yes
+# echo "setup oh-my-zsh"
+# ~/.dotfiles/ohmyzsh/tools/install.sh
 
 echo "---------------------------------------------------------"
 echo "All done!"
