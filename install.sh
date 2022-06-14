@@ -37,5 +37,16 @@ else
   echo "git is not installed"
 fi
 
-echo "Cloning Mike's dotfiles insto .dotfiles"
+if [ -d "$HOME/.dotfiles" ]
+then
+  echo "dir ~/.dotfiles exits"
+  rm -rf $HOME/.dotfiles
+else
+  echo "no"
+fi
+
+echo "Cloning olivercodes's dotfiles insto .dotfiles"
 git clone https://github.com/olivercodes/dotfiles.git ~/.dotfiles
+
+cd $HOME/.dotfiles
+git submodule update --init --recursive
