@@ -1,43 +1,33 @@
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="spaceship"
-plugins=(git tmux vi-mode golang gulp pass docker yarn terraform)
-source $ZSH/oh-my-zsh.sh
-ZSH_DISABLE_COMPFIX=true
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-DEFAULT_USER="$USER"
-SPACESHIP_BATTERY_SHOW=true
-SPACESHIP_BATTERY_THRESHOLD=100
-
-# export JAVA_HOME=/usr/local/opt/openjdk@11
+plugins=(git)
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
 
 javamon() {
   nodemon -e java -w src -x 'javac --class-path ./src -d ./bin src/**/'$1'.java; java -XX:ErrorFile=/var/log/java/java_error%p.log --class-path ./bin -XX:ErrorFile=java.log '$1 
 }
 
-# Comment this out to disable weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+export HISTSIZE=25000
+export SAVEHIST="$HISTSIZE"
+export HISTFILE="$HOME/.zsh_history"
 
-# Set the display value for x forwarding
-export DISPLAY=:0
+export CLICOLOR="1"
 
-# ZSH_TMUX_AUTOSTART="true"
-ZSH_TMUX_AUTOCONNECT="false"
+export GPG_TTY=$(tty)
 
-# Android Setup
-ANDROID_HOME=/Users/bo300646/Library/Android/sdk/tools:/Users/bo300646/Library/Android/sdk/platform-tools:/Users/bo300646/Android/sdk/build-tools
-PATH=$ANDROID_HOME:$PATH
+if [[ -n "$(command -v nvim)" ]]; then
+    export EDITOR="nvim"
+    export VISUAL="nvim"
+    alias vim="nvim"
+else
+    export EDITOR="vim"
+    export VISUAL="vim"
+fi
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-
-export GPGKEY=6B4B0C48
-
-export EDITOR="vim"
-export VISUAL="vim"
+export GOPATH="$HOME/go"
+export VIRTUAL_ENV_DISABLE_PROMPT="1"
 
 up-line-or-local-history() {
     zle set-local-history 1
@@ -59,100 +49,85 @@ zle -N up-line-or-local-history
 zle -N down-line-or-local-history
 
 umask 002
-bindkey '^R' history-incremental-pattern-search-backward
+bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
+bindkey '^R' history-incremental-pattern-search-backward
 
 if [[ -f ~/.gnupg/.gpg-agent-info ]] && [[ -n "$(pgrep gpg-agent)" ]]; then
     source ~/.gnupg/.gpg-agent-info
     export GPG_AGENT_INFO
 else
-    INFO=$(gpg-agent --daemon)
+    INFO=$(gpg-agent --daemon 2> /dev/null)
     eval $INFO
     echo $INFO > ~/.gnupg/.gpg-agent-info
 fi
 
-export GOPATH=$HOME/go
-
-export VIRTUAL_ENV_DISABLE_PROMPT='1'
-
 if [[ -d "$HOME/.nvm" ]]; then
-    source ~/.nvm/nvm.sh
+    # https://github.com/creationix/nvm/issues/1277#issuecomment-345878237
+    alias nvm='unalias nvm && source "$HOME"/.nvm/nvm.sh && nvm'
 fi
 
-# shortcuts
-if [[ -x "$(which nvim)" ]]; then
-    alias vi=nvim
-else
-    alias vi=vim
-fi
-
-alias    ll="ls -alh"
-alias    l="ll"
-alias    ....="cd ../../.."
-alias    .....="cd ../../../.."
-alias    dc="docker-compose"
-alias    df="df -h"
-alias    du="du -h"
-alias    nr="npm run --silent"
-alias    k=kubectl
-alias    tf=terraform
-function vman() { man "$*" | vi -; }
-
-function s() {
-    if [[ -d "$PWD/venv" ]]; then
-        source "$PWD/venv/bin/activate"
-    fi
-
-    if [[ -f "$PWD/.env" ]]; then
-        source "$PWD/.env"
-    fi
-}
-
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+alias ll="ls -alh"
+alias l="ll"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias dc="docker-compose"
+alias dcprod="docker-compose -f docker-compose.yml -f docker-compose.prod.yml"
+alias df="df -h"
+alias du="du -h"
 
 if [[ -d "$GOROOT" ]]; then
-    PATH=$GOROOT/bin:$PATH
+    PATH="$GOROOT/bin:$PATH"
 fi
 
 if [[ -d "$GOPATH" ]]; then
-    PATH=$GOPATH/bin:$PATH
+    PATH="$GOPATH/bin:$PATH"
 fi
 
 if [[ -d "$HOME/bin" ]]; then
-    PATH=$HOME/bin:$PATH
+    PATH="$HOME/bin:$PATH"
 fi
 
 if [[ -d "$HOME/.rvm" ]]; then
-    PATH=$HOME/.rvm/bin:$PATH
+    PATH="$HOME/.rvm/bin:$PATH"
 fi
 
 if [[ -d "$HOME/.cargo" ]]; then
-    PATH=$HOME/.cargo/bin:$PATH
+    PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-autoload -U +X bashcompinit && bashcompinit
-export PATH=$HOME/.service-mesh-hub/bin:$PATH
+if [[ -d "$HOME/.yarn/bin" ]]; then
+    PATH="$HOME/.yarn/bin:$PATH"
+fi
+
+if [[ -d "$HOME/Library/Android/sdk" ]]; then
+    PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+    PATH="$HOME/Library/Android/sdk/emulator:$PATH"
+fi
+
+export fpath=( "$HOME/.zsh/autoload" $fpath )
+
+autoload -Uz promptinit; promptinit
+prompt pure
+
+autoload -Uz compinit; compinit -u
+COMPAUDIT_RESULT=$(compaudit 2> /dev/null)
 
 complete -o nospace -C /usr/local/bin/terraform terraform
 compdef tf='terraform'
-setopt complete_aliases
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+if [[ -n "$COMPAUDIT_RESULT" ]]; then
+  echo "\n[!] compaudit found insecure directories:"
+  echo $COMPAUDIT_RESULT
+fi
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-# eval "$(pyenv init -)"
-# symlink;
+source "$HOME/.zsh/tmux.zsh"
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "/Users/$USER/tools/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/$USER/tools/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "/Users/$USER/tools/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/$USER/tools/google-cloud-sdk/completion.zsh.inc"; fi
-
-[ -s "/Users/$USER/.jabba/jabba.sh" ] && source "/Users/a6277/.jabba/jabba.sh"
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
