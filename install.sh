@@ -22,6 +22,15 @@ then
 fi
 echo "------------------------"
 
+echo "create clean zsh setup"
+# TODO - add an if
+if [ -d "$HOME/.oh-my-zsh" ]
+then
+  echo "nvim folder already present, removing"
+  rm -rf $HOME/.oh-my-zsh
+fi
+echo "------------------------"
+
 echo "now, we will do brew things"
 brew="/usr/local/bin/brew"
 if [ -f "$brew" ]
