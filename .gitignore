@@ -1,7 +1,3 @@
-vim/.netrwhist
-vim/bundle
-vim/sessions
-vim/.init.vim-rplugin~
 tmux/plugins
 tmux/resurrect
 irssi/config.autosave
