@@ -50,3 +50,13 @@ git clone https://github.com/olivercodes/dotfiles.git ~/.dotfiles
 
 cd $HOME/.dotfiles
 git submodule update --init --recursive
+
+cd $HOME
+echo "running RCM's rcup command"
+echo "This is symlink the rc files in .dofiles"
+echo "with the rc files in $HOME"
+echo "---------------------------------------------------------"
+rcup
+
+echo "setting zsh"
+chsh -s $(which zsh)
