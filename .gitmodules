@@ -1,3 +1,6 @@
 [submodule "z"]
 	path = z
 	url = https://github.com/rupa/z
+[submodule "nvm"]
+	path = nvm
+	url = https://github.com/nvm-sh/nvm

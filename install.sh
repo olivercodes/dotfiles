@@ -63,6 +63,7 @@ chsh -s $(which zsh)
 
 echo "running osx defaults"
 ~/.osx.sh
+echo "---------------------------------------------------------"
 
 echo "create clean nvim setup"
 # TODO - add an if
@@ -75,6 +76,19 @@ fi
 echo "linking init.vim for neovim"
 mkdir -p $HOME/.config/nvim
 ln -s $HOME/.init.vim ~/.config/nvim/init.vim
+echo "---------------------------------------------------------"
+
+echo "clean nvm"
+if [ -d "$HOME/.nvm" ] # && clean_install = true
+then
+  echo ".nvm folder exists, cleaning"
+  sudo rm -rf $HOME/.nvm
+else
+  echo ".nvm clean"
+fi
+
+echo "installing node version manager"
+~/.dotfiles/nvm/install.sh
 
 echo "---------------------------------------------------------"
 echo "All done!"
