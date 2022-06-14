@@ -1,5 +1,28 @@
 #!/bin/sh
 
+echo "first, we will cleanup nvm and nvim folders"
+echo "------------------------"
+
+echo "clean nvm"
+if [ -d "$HOME/.nvm" ] # && clean_install = true
+then
+  echo ".nvm folder exists, cleaning"
+  sudo rm -rf $HOME/.nvm
+else
+  echo ".nvm clean"
+fi
+echo "------------------------"
+
+echo "create clean nvim setup"
+# TODO - add an if
+if [ -d "$HOME/.config/nvim" ] # && clean_install = true
+then
+  echo "nvim folder already present, removing"
+  rm -rf $HOME/.config/nvim
+fi
+echo "------------------------"
+
+echo "now, we will do brew things"
 brew="/usr/local/bin/brew"
 if [ -f "$brew" ]
 then
@@ -29,6 +52,7 @@ brew install rcm
 echo "------------------------"
 
 
+echo "------------------------"
 localGit="/usr/local/bin/git"
 if [ -f "$localGit" ]
 then
@@ -58,6 +82,7 @@ echo "with the rc files in $HOME"
 echo "---------------------------------------------------------"
 rcup
 
+
 echo "setting zsh"
 chsh -s $(which zsh)
 
@@ -65,30 +90,20 @@ echo "running osx defaults"
 ~/.osx.sh
 echo "---------------------------------------------------------"
 
-echo "create clean nvim setup"
-# TODO - add an if
-if [ -d "$HOME/.config/nvim" ] # && clean_install = true
-then
-  echo "nvim folder already present, removing"
-  rm -rf $HOME/.config/nvim
-fi
 
 echo "linking init.vim for neovim"
 mkdir -p $HOME/.config/nvim
 ln -s $HOME/.init.vim ~/.config/nvim/init.vim
 echo "---------------------------------------------------------"
 
-echo "clean nvm"
-if [ -d "$HOME/.nvm" ] # && clean_install = true
-then
-  echo ".nvm folder exists, cleaning"
-  sudo rm -rf $HOME/.nvm
-else
-  echo ".nvm clean"
-fi
 
 echo "installing node version manager"
 ~/.dotfiles/nvm/install.sh
+
+echo "---------------------------------------------------------"
+
+echo "setup oh-my-zsh"
+~/.dotfiles/ohmyzsh/tools/install.sh
 
 echo "---------------------------------------------------------"
 echo "All done!"

@@ -107,6 +107,8 @@ alias    dc="docker-compose"
 alias    df="df -h"
 alias    du="du -h"
 alias    nr="npm run --silent"
+alias    k=kubectl
+alias    tf=terraform
 function vman() { man "$*" | vi -; }
 
 function s() {
@@ -120,8 +122,6 @@ function s() {
 }
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-source $ZSH/oh-my-zsh.sh
 
 if [[ -d "$GOROOT" ]]; then
     PATH=$GOROOT/bin:$PATH
@@ -155,11 +155,6 @@ compdef tf='terraform'
 setopt complete_aliases
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias k=kubectl
-
-echo -e "$(nvm use 12)"
-
-alias tf=terraform
 
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
