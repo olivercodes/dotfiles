@@ -99,9 +99,9 @@ rcup
 echo "setting zsh"
 chsh -s $(which zsh)
 
-echo "running osx defaults"
-~/.osx.sh
-echo "---------------------------------------------------------"
+# echo "running osx defaults"
+# ~/.osx.sh
+# echo "---------------------------------------------------------"
 
 
 echo "linking init.vim for neovim"
