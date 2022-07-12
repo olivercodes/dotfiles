@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 echo "first, we will cleanup nvm and nvim folders"
 echo "------------------------"
