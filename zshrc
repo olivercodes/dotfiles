@@ -115,8 +115,14 @@ prompt pure
 autoload -Uz compinit; compinit -u
 COMPAUDIT_RESULT=$(compaudit 2> /dev/null)
 
-complete -o nospace -C /usr/local/bin/terraform terraform
-compdef tf='terraform'
+# `complete` is a bash builtin and the path was Intel-only, so this line was a
+# no-op error on every shell start. bashcompinit provides `complete` under zsh,
+# and the binary is looked up on PATH instead of a hardcoded /usr/local.
+if [[ -n "$(command -v terraform)" ]]; then
+    autoload -Uz bashcompinit && bashcompinit
+    complete -o nospace -C "$(command -v terraform)" terraform
+    compdef tf='terraform'
+fi
 
 if [[ -n "$COMPAUDIT_RESULT" ]]; then
   echo "\n[!] compaudit found insecure directories:"
@@ -126,9 +132,12 @@ fi
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
-source "$HOME/.zsh/tmux.zsh"
+# ~/.zsh/tmux.zsh is not in this repo, so this errored on every shell start.
+# Guarded rather than deleted in case it exists on an older machine.
+[[ -f "$HOME/.zsh/tmux.zsh" ]] && source "$HOME/.zsh/tmux.zsh"
+
 _Z_DATA=$HOME/.z.sh_data
-source "$HOME/.z/z.sh"
+[[ -f "$HOME/.z/z.sh" ]] && source "$HOME/.z/z.sh"
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
