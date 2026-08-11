@@ -1,0 +1,6 @@
+# rcm configuration.
+#
+# nvim/ and ghostty/ are XDG config directories, not dotfiles. Without these
+# exclusions rcup would symlink them to ~/.nvim and ~/.ghostty, where nothing
+# looks for them. install.sh links them into ~/.config instead.
+EXCLUDES="nvim ghostty scripts fonts README.md install.sh osx.sh"

@@ -1,0 +1,41 @@
+# Ghostty configuration
+# Symlinked to ~/.config/ghostty/config by install.sh
+#
+# Reload in place with cmd+shift+, — open this file with cmd+,
+# Full option reference: `ghostty +show-config --default --docs`
+
+# -------------------------------------
+#  Appearance
+# -------------------------------------
+
+# Matches `colorscheme OceanicNext` in nvim/lua/custom/plugins/colors.lua,
+# so the terminal background and the editor background are the same color.
+theme = Oceanic Next
+
+# Nerd Font, needed for nvim-web-devicons / mini.statusline icons and for
+# the powerline separators in tmuxline.conf. This is the Nerd Fonts build of
+# Source Code Pro, which install.sh installs via the font-sauce-code-pro-nerd-font cask.
+font-family = "SauceCodePro Nerd Font"
+font-size = 13
+
+# -------------------------------------
+#  Behavior
+# -------------------------------------
+
+# osx.sh used to set `com.googlecode.iterm2 PromptOnQuit -bool false`
+confirm-close-surface = false
+
+mouse-hide-while-typing = true
+
+# Ghostty sets TERM=xterm-ghostty, which no remote host has terminfo for.
+# ssh-terminfo installs it on the remote on first connect; ssh-env falls back
+# to a sane TERM if that fails. Without these, ssh sessions render garbage.
+#
+# cursor + title are Ghostty defaults, repeated here so that setting this key
+# does not silently drop them. cursor is what makes the vi-mode cursor shape
+# work with `bindkey -v` in zshrc.
+shell-integration-features = cursor,title,ssh-env,ssh-terminfo
+
+# Keep option available as meta for zsh/nvim keybindings rather than
+# letting macOS eat it for accented characters.
+macos-option-as-alt = true

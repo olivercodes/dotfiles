@@ -4,6 +4,3 @@
 [submodule "nvm"]
 	path = nvm
 	url = https://github.com/nvm-sh/nvm
-[submodule "fonts"]
-	path = fonts
-	url = https://github.com/powerline/fonts
