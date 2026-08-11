@@ -61,6 +61,10 @@ for i in $packages; do
   echo "---------------------"
 done
 
+echo "installing Ghostty"
+brew install --cask ghostty
+echo "---------------------"
+
 # Nerd Font build of Source Code Pro. Replaces the powerline/fonts submodule,
 # which is archived upstream and lacks the glyphs nvim-web-devicons and
 # mini.statusline expect. Referenced by font-family in ghostty/config.
