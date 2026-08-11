@@ -12,6 +12,24 @@ curl -fsSL https://raw.githubusercontent.com/olivercodes/dotfiles/main/install.s
 
 (The old install one-liner pointed at `cdn.rawgit.com`, which was shut down in 2019.)
 
+This installs Homebrew if missing, then git, node, tmux, Neovim, zsh, pure, rcm,
+Ghostty, and the SauceCodePro Nerd Font; clones this repo to `~/.dotfiles`;
+runs `rcup`; and symlinks `nvim/` and `ghostty/` into `~/.config`.
+
+#### After it finishes
+
+1. Open Ghostty. It reads `~/.config/ghostty/config` automatically —
+   `cmd+shift+,` reloads it in place.
+2. On a fresh macOS install, grant Ghostty **Full Disk Access**
+   (System Settings → Privacy & Security → Full Disk Access). Without it,
+   tools launched from the terminal get "operation not permitted" reading
+   files under `~`.
+3. Launch `nvim`. `vim.pack` downloads plugins on first start.
+   Needs **Neovim >= 0.12**.
+4. In nvim, `:Mason` and install `gopls`, `terraform-ls`,
+   `typescript-language-server`.
+5. In tmux, `prefix + I` to install the tpm plugins.
+
 ### Layout
 
 | Path | Links to | What it is |
